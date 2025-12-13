@@ -126,13 +126,7 @@ export const useScaffoldEventHistory = <
   const isContractAddressAndClientReady = Boolean(deployedContractData?.address) && Boolean(publicClient);
 
   const fromBlockValue =
-    fromBlock !== undefined
-      ? fromBlock
-      : BigInt(
-          deployedContractData && "deployedOnBlock" in deployedContractData
-            ? deployedContractData.deployedOnBlock || 0
-            : 0,
-        );
+    fromBlock !== undefined ? fromBlock : BigInt((deployedContractData as any)?.deployedOnBlock || 0);
 
   const query = useInfiniteQuery({
     queryKey: [
